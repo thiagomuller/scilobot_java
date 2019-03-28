@@ -47,17 +47,7 @@ public class MessageHandler {
                     sendMessageToTelegram.sendMessageToTelegram("https://i.gifer.com/EsVg.gif");
                 }
             }
-
-//            if(m.find() && pattern.equals(".*(gl)+(ó|o)+(ria)+.*")){
-//                sendMessageToTelegram.sendMessageToTelegram("https://media1.tenor.com/images/1701ca955ab813437e4457667c980123/tenor.gif?itemid=12528285");
-//            } else if(m.find() && pattern.equals(".*((carl)|(carlinhos))+.*((saga)+(s|z|n)+)+.*")){
-//                sendMessageToTelegram.sendMessageToTelegram("https://media.giphy.com/media/jlfulL2NK1D2M/giphy.gif");
-//            } else if(m.find() && pattern.equals("(qual)+.*o+.*(sentido)+.*(da)+.*(vida)+.*\\\\?+")){
-//                sendMessageToTelegram.sendMessageToTelegram("That's obvious, it's 42!!!");
-//            } else if(m.find() && pattern.equals(".*(mind)+.*(blowing)+")){
-//                sendMessageToTelegram.sendMessageToTelegram("https://i.gifer.com/EsVg.gif");
-//            }
-
+            
         });
 
 
