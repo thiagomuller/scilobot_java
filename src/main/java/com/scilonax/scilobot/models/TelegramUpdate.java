@@ -11,7 +11,11 @@ public class TelegramUpdate {
     }
 
     public String getMessageText(){
-        return this.message.getText();
+        if(this.message != null){
+            return this.message.getText();
+        } else{
+            return "";
+        }
     }
 
     public int getUpdateId() {
