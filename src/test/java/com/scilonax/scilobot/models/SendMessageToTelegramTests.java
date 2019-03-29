@@ -1,7 +1,5 @@
 package com.scilonax.scilobot.models;
 
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -9,8 +7,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.List;
 public class SendMessageToTelegramTests {
 
     @Mock
-    private CloseableHttpClient client;
+    RestTemplate restTemplate;
 
     @InjectMocks
     private SendMessageToTelegram sendMessageToTelegram;
@@ -32,13 +32,11 @@ public class SendMessageToTelegramTests {
                 "https://media.giphy.com/media/jlfulL2NK1D2M/giphy.gif", "That's obvious, it's 42!!!"));
         responses.forEach(response -> {
             sendMessageToTelegram.sendMessage(response);
-            try{
-                Mockito.verify(client, Mockito.atLeastOnce()).execute(Mockito.any(HttpPost.class));
-                Mockito.verify(client, Mockito.atLeastOnce()).close();
-
-            }catch(IOException io){
-                io.printStackTrace();
-            }
+            String url = "https://api.telegram.org/bot" + System.getenv("botToken") + "/sendMessage";
+            MultiValueMap<String,Object> parts = new LinkedMultiValueMap<>();
+            parts.add("chat_id", 608316978);
+            parts.add("text", response);
+            Mockito.verify(restTemplate, Mockito.atLeastOnce()).postForObject(url, parts, String.class);
         });
     }
 
