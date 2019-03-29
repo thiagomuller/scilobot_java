@@ -22,7 +22,7 @@ public class ScheduledTasks {
 
     @Scheduled(cron = "* */5 * * * *")
     public void keepAlive(){
-        String url = "https://scilobot.herokuapp.com/";
+        String url = "https://scilobot.herokuapp.com/keep-alive";
         MultiValueMap<String,Object> parts = new LinkedMultiValueMap<>();
         restTemplate.getForEntity(url, String.class);
     }

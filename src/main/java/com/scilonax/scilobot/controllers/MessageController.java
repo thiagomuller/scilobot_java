@@ -23,4 +23,10 @@ public class MessageController {
         messageHandler.handle(telegramUpdate);
         return "OK";
     }
+
+    @RequestMapping(value = "/keep-alive")
+    @ResponseBody
+    public String receiveKeepAliveRequest(){
+        return "OK";
+    }
 }
