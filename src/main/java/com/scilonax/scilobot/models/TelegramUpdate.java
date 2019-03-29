@@ -4,7 +4,7 @@ public class TelegramUpdate {
     private int updateId;
     private Message message;
 
-    private TelegramUpdate(){}
+    public TelegramUpdate(){}
 
     public static Builder newBuilder(){
         return new Builder();
@@ -12,6 +12,22 @@ public class TelegramUpdate {
 
     public String getMessageText(){
         return this.message.getText();
+    }
+
+    public int getUpdateId() {
+        return updateId;
+    }
+
+    public void setUpdateId(int updateId) {
+        this.updateId = updateId;
+    }
+
+    public Message getMessage() {
+        return message;
+    }
+
+    public void setMessage(Message message) {
+        this.message = message;
     }
 
     public static final class Builder{

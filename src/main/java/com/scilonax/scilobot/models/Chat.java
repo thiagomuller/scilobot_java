@@ -6,8 +6,39 @@ public class Chat {
     private String type;
     private Boolean allMembersAreAdministrators;
 
-    private Chat(){}
+    public Chat(){}
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Boolean getAllMembersAreAdministrators() {
+        return allMembersAreAdministrators;
+    }
+
+    public void setAllMembersAreAdministrators(Boolean allMembersAreAdministrators) {
+        this.allMembersAreAdministrators = allMembersAreAdministrators;
+    }
 
     public static final class Builder{
         private int id;

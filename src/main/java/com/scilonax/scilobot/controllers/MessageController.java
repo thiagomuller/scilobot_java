@@ -4,7 +4,9 @@ import com.scilonax.scilobot.models.MessageHandler;
 import com.scilonax.scilobot.models.TelegramUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MessageController {
@@ -16,7 +18,9 @@ public class MessageController {
     }
 
     @RequestMapping(value = "/")
-    public void receiveTelegramUpdate(TelegramUpdate telegramUpdate){
+    @ResponseBody
+    public String receiveTelegramUpdate(@RequestBody TelegramUpdate telegramUpdate){
         messageHandler.handle(telegramUpdate);
+        return "OK";
     }
 }
