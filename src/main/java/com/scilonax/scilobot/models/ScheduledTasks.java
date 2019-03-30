@@ -20,14 +20,14 @@ public class ScheduledTasks {
     @Autowired
     private SendMessageToTelegram sendMessageToTelegram;
 
-    @Scheduled(cron = "0 0/5 0 ? * *")
+    @Scheduled(cron = "0 */5 * * * *")
     public void keepAlive(){
         String url = "https://scilobot.herokuapp.com/keep-alive";
         MultiValueMap<String,Object> parts = new LinkedMultiValueMap<>();
         restTemplate.getForEntity(url, String.class);
     }
 
-    @Scheduled(cron = "0 0 0/1 ? * *")
+    @Scheduled(cron = "0 0 */1 * * *")
     public void callMITScraper(){
         System.out.println("I'll start running MIT news right now, don't stop me now!");
         String command = "python mit_news.py";
@@ -37,7 +37,6 @@ public class ScheduledTasks {
             BufferedReader reader =
                     new BufferedReader((new InputStreamReader(mitCall.getInputStream())));
             StringBuilder builder = new StringBuilder();
-            String line = null;
             builder.append(reader.readLine());
             String result = builder.toString();
 
@@ -50,8 +49,6 @@ public class ScheduledTasks {
         }catch(IOException io){
             io.printStackTrace();
         }
-
-
     }
 
 }
