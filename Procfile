@@ -1,2 +1,2 @@
-web: java -jar target/src/main/java/com/scilonax/scilobot/ScilobotApplication.java --p $PORT
+web: java -Dserver.port=$PORT -jar target/scilobot-0.0.1-SNAPSHOT.jar
 
