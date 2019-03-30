@@ -20,6 +20,7 @@ public class MessageController {
     @RequestMapping(value = "/")
     @ResponseBody
     public String receiveTelegramUpdate(@RequestBody TelegramUpdate telegramUpdate){
+        System.out.println("Just received a post request on root route");
         messageHandler.handle(telegramUpdate);
         return "OK";
     }
