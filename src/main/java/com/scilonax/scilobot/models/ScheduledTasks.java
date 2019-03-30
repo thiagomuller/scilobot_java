@@ -20,14 +20,14 @@ public class ScheduledTasks {
     @Autowired
     private SendMessageToTelegram sendMessageToTelegram;
 
-    @Scheduled(cron = "* */5 * * * *")
+    @Scheduled(cron = "0 0/5 0 ? * *")
     public void keepAlive(){
         String url = "https://scilobot.herokuapp.com/keep-alive";
         MultiValueMap<String,Object> parts = new LinkedMultiValueMap<>();
         restTemplate.getForEntity(url, String.class);
     }
 
-    @Scheduled(cron = "0 0 */1 * * *")
+    @Scheduled(cron = "0 0 0/1 ? * *")
     public void callMITScraper(){
         System.out.println("I'll start running MIT news right now, don't stop me now!");
         String command = "python mit_news.py";
