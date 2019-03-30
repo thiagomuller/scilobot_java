@@ -25,6 +25,8 @@ def mit_news_scraper():
         soup = BeautifulSoup(html , 'html.parser')
         if(soup.find('span' , {'itemprop' : 'datePublished'})['content'] == current_date):
             return article
+        else:
+        	return "null"
 
 if __name__ == '__main__':
     print(mit_news_scraper())

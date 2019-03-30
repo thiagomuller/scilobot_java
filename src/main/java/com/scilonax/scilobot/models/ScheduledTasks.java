@@ -18,6 +18,9 @@ public class ScheduledTasks {
     private RestTemplate restTemplate;
 
     @Autowired
+    private DBhandler dbHandler;
+
+    @Autowired
     private SendMessageToTelegram sendMessageToTelegram;
 
     @Scheduled(cron = "0 */5 * * * *")
@@ -37,10 +40,15 @@ public class ScheduledTasks {
             BufferedReader reader =
                     new BufferedReader((new InputStreamReader(mitCall.getInputStream())));
             StringBuilder builder = new StringBuilder();
-            builder.append(reader.readLine());
+            String line = null;
+            while((line = reader.readLine()) != null){
+                builder.append(line);
+                builder.append(System.getProperty("line.separator"));
+            }
+
             String result = builder.toString();
 
-            if(result.compareTo("None") == 0){
+            if(result.compareTo("None") == 0 && dbHandler.handleUrlsonDB(result)){
                 String response = "Hi Scilonax, it seems MIT posted some news about Machine Learning, here it is:\n" + result;
                 sendMessageToTelegram.sendMessage(response);
             }

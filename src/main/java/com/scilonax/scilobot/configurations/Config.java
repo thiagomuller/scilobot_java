@@ -18,7 +18,7 @@ public class Config {
     }
 
     @Bean
-    public BasicDataSource dataSource() throws URISyntaxException{
+    public BasicDataSource dataSource() throws URISyntaxException {
         URI dbURI = new URI(System.getenv("DATABASE_URL"));
         String username = dbURI.getUserInfo().split(":")[0];
         String password = dbURI.getUserInfo().split(":")[1];
