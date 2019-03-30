@@ -40,7 +40,7 @@ public class ScheduledTasks {
             builder.append(reader.readLine());
             String result = builder.toString();
 
-            if(result != "None"){
+            if(result.compareTo("None") == 0){
                 String response = "Hi Scilonax, it seems MIT posted some news about Machine Learning, here it is:\n" + result;
                 sendMessageToTelegram.sendMessage(response);
             }
