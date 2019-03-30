@@ -1,11 +1,6 @@
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import datetime
-import logging
-
-logger = logging.getLogger()
-
-
 
 def mit_news_scraper():
     #MIT news on machine learning
@@ -30,3 +25,6 @@ def mit_news_scraper():
         soup = BeautifulSoup(html , 'html.parser')
         if(soup.find('span' , {'itemprop' : 'datePublished'})['content'] == current_date):
             return article
+
+if __name__ == '__main__':
+    print(mit_news_scraper())
