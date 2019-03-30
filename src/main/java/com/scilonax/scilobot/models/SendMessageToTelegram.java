@@ -17,7 +17,7 @@ public class SendMessageToTelegram {
 
         String url = "https://api.telegram.org/bot" + System.getenv("botToken") + "/sendMessage";
         MultiValueMap<String,Object> parts = new LinkedMultiValueMap<>();
-        parts.add("chat_id", 608316978);
+        parts.add("chat_id", System.getenv("chatId"));
         parts.add("text", response);
         restTemplate.postForObject(url, parts, String.class);
     }
