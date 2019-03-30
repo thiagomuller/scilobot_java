@@ -3,7 +3,6 @@ package com.scilonax.scilobot.models;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,8 +16,7 @@ public class DBhandler {
     @Autowired
     DataSource dataSource;
 
-    @PostConstruct
-    public Boolean handleUrlsonDB(String url){
+    public Boolean handleUrlOnDB(String url){
         try{
             Statement stmt = dataSource.getConnection().createStatement();
             stmt.executeUpdate("CREATE TABLE IF NOT EXISTS urls(url TEXT);");

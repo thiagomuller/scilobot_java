@@ -48,7 +48,7 @@ public class ScheduledTasks {
 
             String result = builder.toString();
 
-            if(result.compareTo("None") == 0 && dbHandler.handleUrlsonDB(result)){
+            if(result.compareTo("None") == 0 && dbHandler.handleUrlOnDB(result)){
                 String response = "Hi Scilonax, it seems MIT posted some news about Machine Learning, here it is:\n" + result;
                 sendMessageToTelegram.sendMessage(response);
             }
