@@ -1,8 +1,8 @@
 package com.scilonax.scilobot.models;
 
-import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,7 +12,7 @@ import java.util.List;
 public class DBhandler {
 
     @Autowired
-    BasicDataSource dataSource;
+    DataSource dataSource;
 
     public Boolean handleUrlsonDB(String url){
         try{
@@ -24,11 +24,9 @@ public class DBhandler {
                 retrievedUrls.add(rs.getString("url"));
             }
             if(retrievedUrls.contains(url)){
-                dataSource.close();
                 return false;
             }
             stmt.executeUpdate("INSERT INTO urls(url) VALUES('" + url + "');");
-            dataSource.close();
         }catch(SQLException sqlexception){
             sqlexception.printStackTrace();
         }
