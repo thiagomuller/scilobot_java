@@ -1,1 +1,2 @@
-web: java $JAVA_OPTS -jar target/*.jar
+web: java -jar target/src/main/java/com/scilonax/scilobot/ScilobotApplication.java --p $PORT
+
