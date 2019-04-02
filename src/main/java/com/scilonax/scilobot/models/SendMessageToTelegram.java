@@ -19,6 +19,7 @@ public class SendMessageToTelegram {
         MultiValueMap<String,Object> parts = new LinkedMultiValueMap<>();
         parts.add("chat_id", System.getenv("chatId"));
         parts.add("text", response);
+        System.out.println("I'm calling rest template on: " + url);
         restTemplate.postForObject(url, parts, String.class);
     }
 }

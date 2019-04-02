@@ -30,7 +30,7 @@ public class ScheduledTasks {
         restTemplate.getForEntity(url, String.class);
     }
 
-    @Scheduled(cron = "0 0 */1 * * *")
+    @Scheduled(cron = "0 * */1 * * *")
     public void callMITScraper(){
         System.out.println("I'll start running MIT news right now, don't stop me now!");
         String command = "python mit_news.py";
@@ -48,7 +48,8 @@ public class ScheduledTasks {
 
             String result = builder.toString();
 
-            if(result.compareTo("None") == 0 && dbHandler.handleUrlOnDB(result)){
+            System.out.println(result);
+            if(!result.equals("null") && dbHandler.handleUrlOnDB(result)){
                 String response = "Hi Scilonax, it seems MIT posted some news about Machine Learning, here it is:\n" + result;
                 sendMessageToTelegram.sendMessage(response);
             }
