@@ -35,7 +35,7 @@ public class ScheduledTasks {
         restTemplate.getForEntity(url, String.class);
     }
 
-    @Scheduled(cron = "0 * */1 * * *")
+    @Scheduled(cron = "0 0 */1 * * *")
     public void callMITScraper(){
         System.out.println("I'll start running MIT news right now, don't stop me now!");
         String command = "python mit_news.py";
