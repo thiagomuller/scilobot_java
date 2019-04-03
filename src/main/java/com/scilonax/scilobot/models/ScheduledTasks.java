@@ -1,5 +1,7 @@
 package com.scilonax.scilobot.models;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,9 @@ import org.springframework.web.client.RestTemplate;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class ScheduledTasks {
@@ -48,11 +53,20 @@ public class ScheduledTasks {
 
             String result = builder.toString();
 
-            System.out.println(result);
-            if(!result.equals("null") && dbHandler.handleUrlOnDB(result)){
-                String response = "Hi Scilonax, it seems MIT posted some news about Machine Learning, here it is:\n" + result;
-                sendMessageToTelegram.sendMessage(response);
+            if(!result.equals("null")){
+                Map<String, List<String>> myMap = new HashMap<String, List<String>>();
+                ObjectMapper mapper = new ObjectMapper();
+                myMap = mapper.readValue(result, new TypeReference<Map<String,List<String>>>(){});
+                List<String> urls = myMap.get("urls");
+
+                urls.forEach(url ->{
+                    if(dbHandler.handleUrlOnDB(url)){
+                        String response = "Hi Scilonax, it seems MIT posted some news about Machine Learning, here it is:\n" + result;
+                        sendMessageToTelegram.sendMessage(response);
+                    }
+                });
             }
+
             System.out.println("I've finished with python");
 
         }catch(IOException io){

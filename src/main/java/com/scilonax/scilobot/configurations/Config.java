@@ -29,7 +29,6 @@ public class Config {
         basicDataSource.setUrl(dbUrl);
         basicDataSource.setUsername(username);
         basicDataSource.setPassword(password);
-
         return basicDataSource;
     }
 
