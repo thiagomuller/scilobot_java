@@ -51,7 +51,7 @@ public class ScheduledTasks {
                 builder.append(System.getProperty("line.separator"));
             }
 
-            String result = builder.toString();
+            String result = builder.toString().trim();
 
             if(!result.equals("null")){
                 Map<String, List<String>> myMap = new HashMap<String, List<String>>();
