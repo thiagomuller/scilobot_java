@@ -52,6 +52,7 @@ public class ScheduledTasks {
             }
 
             String result = builder.toString().trim();
+            System.out.println(result);
 
             if(!result.equals("null")){
                 Map<String, List<String>> myMap = new HashMap<String, List<String>>();
@@ -60,6 +61,7 @@ public class ScheduledTasks {
                 List<String> urls = myMap.get("urls");
 
                 urls.forEach(url ->{
+                    System.out.println(url);
                     if(dbHandler.handleUrlOnDB(url)){
                         String response = "Hi Scilonax, it seems MIT posted some news about Machine Learning, here it is:\n" + result;
                         sendMessageToTelegram.sendMessage(url);
