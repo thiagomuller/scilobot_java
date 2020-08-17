@@ -28,58 +28,61 @@ public class MessageHandlerTests {
     @InjectMocks
     private MessageHandler messageHandler;
 
-
     @Test
-    public void whenHandlerGetsCalledWithHi(){
+    public void whenHandlerGetsCalledWithHi() {
         List<String> texts = new ArrayList<>();
-        texts.addAll(Arrays.asList("Hi" , "hi" , "Hi there" , "hi there"));
+        texts.addAll(Arrays.asList("Hi", "hi", "Hi there", "hi there"));
         texts.forEach(text -> {
             when(telegramUpdate.getMessageText()).thenReturn(text);
             messageHandler.handle(telegramUpdate);
-            verify(sendMessageToTelegram,atLeastOnce()).sendMessage("Hi there, I'm Scilobot! Let's make some science today?");
+            verify(sendMessageToTelegram, atLeastOnce())
+                    .sendMessage("Hi there, I'm Scilobot! Let's make some science today?");
         });
     }
 
     @Test
-    public void whenHandlerGetsCalledWithGloria(){
+    public void whenHandlerGetsCalledWithGloria() {
         List<String> texts = new ArrayList<>();
-        texts.addAll(Arrays.asList("Gloria","gloria", "Glória", "glória"));
+        texts.addAll(Arrays.asList("Gloria", "gloria", "Glória", "glória"));
         texts.forEach(text -> {
             when(telegramUpdate.getMessageText()).thenReturn(text);
             messageHandler.handle(telegramUpdate);
-            verify(sendMessageToTelegram,atLeastOnce()).sendMessage("https://media1.tenor.com/images/1701ca955ab813437e4457667c980123/tenor.gif?itemid=12528285");
+            verify(sendMessageToTelegram, atLeastOnce()).sendMessage(
+                    "https://media1.tenor.com/images/1701ca955ab813437e4457667c980123/tenor.gif?itemid=12528285");
         });
     }
 
     @Test
-    public void whenHandlerGetsCalledWithCarlSagan(){
+    public void whenHandlerGetsCalledWithCarlSagan() {
         List<String> texts = new ArrayList<>();
-        texts.addAll(Arrays.asList("Carl Sagan", "carl sagan", "carlinhos sagaz", "Carlinhos Sagaz", "Carlinhos sagaz", "carlinho Sagaz"));
+        texts.addAll(Arrays.asList("Carl Sagan", "carl sagan", "carlinhos sagaz", "Carlinhos Sagaz", "Carlinhos sagaz",
+                "carlinho Sagaz"));
         texts.forEach(text -> {
             when(telegramUpdate.getMessageText()).thenReturn(text);
             messageHandler.handle(telegramUpdate);
-            verify(sendMessageToTelegram,atLeastOnce()).sendMessage("https://media.giphy.com/media/jlfulL2NK1D2M/giphy.gif");
+            verify(sendMessageToTelegram, atLeastOnce())
+                    .sendMessage("https://media.giphy.com/media/jlfulL2NK1D2M/giphy.gif");
         });
-
 
     }
 
     @Test
-    public void whenHandlerGetsCalledWithSentidoDaVida(){
+    public void whenHandlerGetsCalledWithSentidoDaVida() {
         List<String> texts = new ArrayList<>();
-        texts.addAll(Arrays.asList("qual o sentido da vida", "Qual o sentido da vida", "sentido da vida", "Sentido da vida"));
+        texts.addAll(Arrays.asList("qual o sentido da vida", "Qual o sentido da vida", "sentido da vida",
+                "Sentido da vida"));
         texts.forEach(text -> {
             when(telegramUpdate.getMessageText()).thenReturn(text);
             messageHandler.handle(telegramUpdate);
-            verify(sendMessageToTelegram,atLeastOnce()).sendMessage("That's obvious, it's 42!!!");
+            verify(sendMessageToTelegram, atLeastOnce()).sendMessage("That's obvious, it's 42!!!");
         });
     }
 
     @Test
-    public void whenHandlerGetsCalledWithMindBlowing(){
+    public void whenHandlerGetsCalledWithMindBlowing() {
         when(telegramUpdate.getMessageText()).thenReturn("mind blowing");
         messageHandler.handle(telegramUpdate);
-        verify(sendMessageToTelegram,atLeastOnce()).sendMessage("https://i.gifer.com/EsVg.gif");
+        verify(sendMessageToTelegram, atLeastOnce()).sendMessage("https://i.gifer.com/EsVg.gif");
 
     }
 
