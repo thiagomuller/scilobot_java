@@ -36,7 +36,7 @@ public class MessageHandlerTests {
             when(telegramUpdate.getMessageText()).thenReturn(text);
             messageHandler.handle(telegramUpdate);
             verify(sendMessageToTelegram, atLeastOnce())
-                    .sendMessage("Hi there, I'm Scilobot! Let's make some science today?");
+                    .sendMessage("Hi there, I'm Scilobot! Let's make some science today?", 1);
         });
     }
 
@@ -48,7 +48,7 @@ public class MessageHandlerTests {
             when(telegramUpdate.getMessageText()).thenReturn(text);
             messageHandler.handle(telegramUpdate);
             verify(sendMessageToTelegram, atLeastOnce()).sendMessage(
-                    "https://media1.tenor.com/images/1701ca955ab813437e4457667c980123/tenor.gif?itemid=12528285");
+                    "https://media1.tenor.com/images/1701ca955ab813437e4457667c980123/tenor.gif?itemid=12528285", 1);
         });
     }
 
@@ -61,7 +61,7 @@ public class MessageHandlerTests {
             when(telegramUpdate.getMessageText()).thenReturn(text);
             messageHandler.handle(telegramUpdate);
             verify(sendMessageToTelegram, atLeastOnce())
-                    .sendMessage("https://media.giphy.com/media/jlfulL2NK1D2M/giphy.gif");
+                    .sendMessage("https://media.giphy.com/media/jlfulL2NK1D2M/giphy.gif", 1);
         });
 
     }
@@ -74,7 +74,7 @@ public class MessageHandlerTests {
         texts.forEach(text -> {
             when(telegramUpdate.getMessageText()).thenReturn(text);
             messageHandler.handle(telegramUpdate);
-            verify(sendMessageToTelegram, atLeastOnce()).sendMessage("That's obvious, it's 42!!!");
+            verify(sendMessageToTelegram, atLeastOnce()).sendMessage("That's obvious, it's 42!!!", 1);
         });
     }
 
@@ -82,7 +82,7 @@ public class MessageHandlerTests {
     public void whenHandlerGetsCalledWithMindBlowing() {
         when(telegramUpdate.getMessageText()).thenReturn("mind blowing");
         messageHandler.handle(telegramUpdate);
-        verify(sendMessageToTelegram, atLeastOnce()).sendMessage("https://i.gifer.com/EsVg.gif");
+        verify(sendMessageToTelegram, atLeastOnce()).sendMessage("https://i.gifer.com/EsVg.gif", 1);
 
     }
 

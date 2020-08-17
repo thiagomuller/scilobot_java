@@ -12,12 +12,11 @@ public class SendMessageToTelegram {
     @Autowired
     private RestTemplate restTemplate;
 
-
-    public void sendMessage(String response){
+    public void sendMessage(String response, int chatId) {
 
         String url = "https://api.telegram.org/bot" + System.getenv("botToken") + "/sendMessage";
-        MultiValueMap<String,Object> parts = new LinkedMultiValueMap<>();
-        parts.add("chat_id", System.getenv("chatId"));
+        MultiValueMap<String, Object> parts = new LinkedMultiValueMap<>();
+        parts.add("chat_id", chatId);
         parts.add("text", response);
         System.out.println("I'm calling rest template on: " + url);
         restTemplate.postForObject(url, parts, String.class);

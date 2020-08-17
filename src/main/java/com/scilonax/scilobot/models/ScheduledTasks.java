@@ -24,24 +24,23 @@ public class ScheduledTasks {
     private SendMessageToTelegram sendMessageToTelegram;
 
     @Scheduled(cron = "0 */5 * * * *")
-    public void keepAlive(){
+    public void keepAlive() {
         String url = "https://scilobot.herokuapp.com/keep-alive";
-        MultiValueMap<String,Object> parts = new LinkedMultiValueMap<>();
+        MultiValueMap<String, Object> parts = new LinkedMultiValueMap<>();
         restTemplate.getForEntity(url, String.class);
     }
 
     @Scheduled(cron = "0 * */1 * * *")
-    public void callMITScraper(){
+    public void callMITScraper() {
         System.out.println("I'll start running MIT news right now, don't stop me now!");
         String command = "python mit_news.py";
-        try{
+        try {
             Process mitCall = Runtime.getRuntime().exec(command);
 
-            BufferedReader reader =
-                    new BufferedReader((new InputStreamReader(mitCall.getInputStream())));
+            BufferedReader reader = new BufferedReader((new InputStreamReader(mitCall.getInputStream())));
             StringBuilder builder = new StringBuilder();
             String line = null;
-            while((line = reader.readLine()) != null){
+            while ((line = reader.readLine()) != null) {
                 builder.append(line);
                 builder.append(System.getProperty("line.separator"));
             }
@@ -49,13 +48,14 @@ public class ScheduledTasks {
             String result = builder.toString();
 
             System.out.println(result);
-            if(!result.equals("null") && dbHandler.handleUrlOnDB(result)){
-                String response = "Hi Scilonax, it seems MIT posted some news about Machine Learning, here it is:\n" + result;
-                sendMessageToTelegram.sendMessage(response);
+            if (!result.equals("null") && dbHandler.handleUrlOnDB(result)) {
+                String response = "Hi Scilonax, it seems MIT posted some news about Machine Learning, here it is:\n"
+                        + result;
+                sendMessageToTelegram.sendMessage(response, Integer.valueOf(System.getenv("chatId")));
             }
             System.out.println("I've finished with python");
 
-        }catch(IOException io){
+        } catch (IOException io) {
             io.printStackTrace();
         }
     }
