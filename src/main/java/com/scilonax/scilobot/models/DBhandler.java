@@ -21,6 +21,7 @@ public class DBhandler {
             if(url.equals("null")){
                 return false;
             }
+
             Statement stmt = dataSource.getConnection().createStatement();
             stmt.executeUpdate("CREATE TABLE IF NOT EXISTS urls(url TEXT);");
             List<String> retrievedUrls = new ArrayList<>();
