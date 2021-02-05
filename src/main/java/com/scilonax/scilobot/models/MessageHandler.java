@@ -22,7 +22,8 @@ public class MessageHandler {
 
     public void handle(TelegramUpdate telegramUpdate) {
 
-        if (telegramUpdate.getMessageText() != null) {
+        if (telegramUpdate.getMessageText() != null && telegramUpdate.getMessage() != null
+                && telegramUpdate.getMessage().getChat() != null) {
             int chatId = telegramUpdate.getMessage().getChat().getId();
             handleEoz(telegramUpdate.getMessageText(), chatId);
             if (telegramUpdate.getMessageText().toLowerCase().equals("hi")
